@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#4d8f91" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Fall in Swiss" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="application-name" content="Fall in Swiss" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="icon" href="icons/icon-192.png" />
+<title>Fall in Switzerland · Italy</title>
+<style>
+:root{--bg:#f4f1ec;--card:#fffdf9;--ink:#253033;--muted:#8a8d89;--line:#e9e3db;--accent:#4d8f91;--accent2:#d8a66a;--deep:#29444b;--shadow:0 9px 28px rgba(43,51,52,.08);--radius:20px}
+*{box-sizing:border-box} html,body{margin:0;background:#ddd8d1;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+body{display:flex;justify-content:center;min-height:100vh}.app{width:min(100%,430px);min-height:100vh;background:var(--bg);position:relative;overflow:hidden}
+.hero{height:285px;background:linear-gradient(180deg,rgba(23,45,51,.18),rgba(23,45,51,.72)),radial-gradient(circle at 78% 24%,rgba(255,250,233,.55),transparent 24%),linear-gradient(135deg,#91aaa7 0%,#5f7f7f 42%,#304c54 100%);position:relative;color:#fff;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:auto -20% 0 -20%;height:145px;background:linear-gradient(135deg,transparent 0 37%,#f3eee6 37% 49%,#e6e0d7 49% 62%,transparent 62%);opacity:.95}.hero:after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 15% 18%,rgba(255,255,255,.65) 0 2px,transparent 3px),radial-gradient(circle at 82% 30%,rgba(255,255,255,.5) 0 2px,transparent 3px),radial-gradient(circle at 56% 12%,rgba(255,255,255,.5) 0 1px,transparent 2px);background-size:90px 80px,120px 100px,75px 95px;opacity:.45}
+.heroText{position:relative;z-index:2;padding:42px 24px 0}.eyebrow{font-size:12px;letter-spacing:.18em;opacity:.86}.hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:28px;line-height:1.15;margin:10px 0 10px}.hero .sub{font-size:12px;opacity:.88;letter-spacing:.04em}.heroStat{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}.chip{padding:7px 10px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);border-radius:999px;font-size:11px;backdrop-filter:blur(5px)}
+.content{margin-top:-18px;position:relative;z-index:4;padding:0 14px 94px}.card{background:var(--card);border:1px solid rgba(255,255,255,.7);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:12px}.card h2{font-size:17px;margin:0 0 11px}.cardTitle{display:flex;align-items:center;justify-content:space-between;gap:12px}.small{font-size:11px;color:var(--muted)}
+.stayRow,.flightRow,.trainRow{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.stayRow:last-child,.flightRow:last-child,.trainRow:last-child{border-bottom:0}.label{font-size:11px;color:var(--muted)}.value{font-size:13px;font-weight:600}.value em{font-style:normal;color:var(--accent)}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,430px);height:76px;background:rgba(255,252,247,.94);backdrop-filter:blur(16px);border-top:1px solid #e8e2da;display:grid;grid-template-columns:repeat(5,1fr);z-index:20;padding-bottom:env(safe-area-inset-bottom)}.nav button{border:0;background:none;color:#9aa09f;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}.nav button.active{color:var(--accent);font-weight:700}.icon{font-size:20px;line-height:1}
+.section{display:none}.section.active{display:block}.progress{height:6px;border-radius:999px;background:#e6e1da;overflow:hidden}.progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#77a9a4);border-radius:inherit}.progressMeta{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:6px}.checkgroup{margin-top:14px}.groupHead{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;margin-bottom:7px}.item{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f0ece6;font-size:12px}.item:last-child{border-bottom:0}.item input{appearance:none;width:19px;height:19px;border:1.5px solid #b8bebc;border-radius:6px;margin:0;flex:0 0 auto}.item input:checked{background:var(--accent);border-color:var(--accent);position:relative}.item input:checked:after{content:'✓';position:absolute;color:#fff;font-size:13px;left:3px;top:0}.item input:checked+span{text-decoration:line-through;color:#a5aaa8}
+.dayTabs{display:flex;gap:8px;overflow:auto;padding-bottom:4px;scrollbar-width:none}.dayTabs::-webkit-scrollbar{display:none}.dayTab{min-width:56px;border:1px solid #e0ddd6;background:#fbfaf7;border-radius:13px;padding:8px 6px;text-align:center;color:#7f8684}.dayTab b{display:block;color:var(--ink);font-size:14px}.dayTab span{font-size:10px}.dayTab.active{background:#e6f0ef;border-color:#b5d0cd;color:var(--accent)}.dayTab.active b{color:var(--accent)}
+.dayTabs{scroll-snap-type:x proximity}.dayTab{scroll-snap-align:center;cursor:pointer}.dayOverview{background:linear-gradient(145deg,#31545b,#5f8c8c);color:#fff}.dayOverview .small{color:rgba(255,255,255,.72)}.dayOverview h2{line-height:1.35}.dayMeta{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:11px}.dayMeta span{padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.13)}.dayControls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.dayArrow{min-height:44px;border:1px solid #ddd8d0;border-radius:13px;background:#fffdf9;color:var(--deep);font-size:12px;font-weight:700}.dayArrow:disabled{color:#b8bbb8;background:#f1eee8}.eventHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.mapLink{flex:0 0 auto;text-decoration:none;color:var(--accent);border:1px solid #c7d9d6;background:#f4faf9;border-radius:999px;padding:6px 9px;font-size:10px;font-weight:700}
+.routeHeader{display:flex;gap:10px;align-items:center;margin:8px 0 15px}.routeDot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px #e4f0ef}.routeLine{width:2px;height:22px;background:repeating-linear-gradient(to bottom,var(--accent) 0 4px,transparent 4px 8px);margin-left:3.5px}.event{position:relative;padding:0 0 15px 25px}.event:before{content:"";position:absolute;left:4px;top:6px;width:9px;height:9px;border:2px solid var(--accent);border-radius:50%;background:#fff}.event:after{content:"";position:absolute;left:8px;top:19px;bottom:0;border-left:2px dashed #bfd1cf}.event:last-child:after{display:none}.time{font-size:11px;color:var(--accent);font-weight:700}.event h3{font-size:14px;margin:2px 0 3px}.event p{font-size:11px;color:#707773;line-height:1.55;margin:0}.tag{display:inline-block;margin-top:6px;font-size:10px;padding:4px 7px;border-radius:999px;background:#f1ece4;color:#756b5d}
+.heroMini{height:92px;border-radius:16px;background:linear-gradient(135deg,#d8c7ad,#8aa6a2);padding:14px;color:#fff;display:flex;align-items:flex-end;font-family:Georgia,"Times New Roman",serif;font-size:18px;margin-bottom:12px}.priceGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{padding:13px;background:#f7f4ef;border-radius:14px}.metric .k{font-size:10px;color:var(--muted)}.metric .v{font-size:17px;font-weight:700;margin-top:2px}
+.links a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:inherit;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.links a:last-child{border-bottom:0}.arrow{color:var(--muted)}.empty{padding:13px;background:#f7f5f0;border:1px dashed #ded7cd;border-radius:13px;font-size:11px;color:#8a8d89;line-height:1.5}
+.toast{position:fixed;z-index:30;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);opacity:0;background:#29444b;color:#fff;padding:9px 13px;border-radius:999px;font-size:11px;transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:360px){.hero h1{font-size:25px}.stayRow,.flightRow,.trainRow{grid-template-columns:76px 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <div class="heroText">
+      <div class="eyebrow">THE ART OF WANDERING</div>
+      <h1>瑞士與義大利<br/>秋日散策</h1>
+      <div class="sub">SWITZERLAND & ITALY TRAVEL GUIDE BOOK</div>
+      <div class="heroStat"><span class="chip">2026.10.01 — 10.11</span><span class="chip">11 天 10 夜</span><span class="chip">Audrey & Jamie</span></div>
+    </div>
+  </div>
+  <main class="content">
+    <section id="overview" class="section active">
+      <div class="card">
+        <div class="cardTitle"><h2>住宿一覽</h2><span class="small">5 stays</span></div>
+        <div class="stayRow"><div class="label">10/01–10/03</div><div class="value">Grindelwald · Hotel Tschuggen</div></div>
+        <div class="stayRow"><div class="label">10/03–10/05</div><div class="value">Zermatt · Hotel Bahnhof</div></div>
+        <div class="stayRow"><div class="label">10/05–10/08</div><div class="value">Roma · Budget Rooms Des Arts</div></div>
+        <div class="stayRow"><div class="label">10/08–10/10</div><div class="value">Venice · Anda Venice</div></div>
+        <div class="stayRow"><div class="label">10/10–10/11</div><div class="value">Milano · Airbnb</div></div>
+      </div>
+      <div class="card">
+        <div class="cardTitle"><h2>交通動線</h2><span class="small">Rail + Air</span></div>
+        <div class="flightRow"><div class="label">09/30</div><div class="value">TPE → MXP <em>23:45</em></div></div>
+        <div class="flightRow"><div class="label">10/11</div><div class="value">MXP → TPE <em>11:15</em></div></div>
+        <div class="trainRow"><div class="label">10/01</div><div class="value">MXP → Spiez <em>10:19–15:37</em></div></div>
+        <div class="trainRow"><div class="label">10/03</div><div class="value">Grindelwald → Kandersteg → Zermatt</div></div>
+        <div class="trainRow"><div class="label">10/05</div><div class="value">Zermatt → Milano <em>07:06–10:50</em></div></div>
+        <div class="trainRow"><div class="label">10/05</div><div class="value">Milano → Roma <em>11:15–14:30</em></div></div>
+        <div class="trainRow"><div class="label">10/08</div><div class="value">Roma → Firenze → Venezia</div></div>
+      </div>
+      <div class="card">
+        <div class="heroMini">Alps → Rome → Florence → Venice → Milan</div>
+        <div class="priceGrid"><div class="metric"><div class="k">瑞士篇</div><div class="v">10/01–10/05</div></div><div class="metric"><div class="k">義大利篇</div><div class="v">10/05–10/11</div></div></div>
+      </div>
+    </section>
+
+    <section id="prep" class="section">
+      <div class="card">
+        <div class="cardTitle"><h2>旅行前準備</h2><span id="prepMeta" class="small">0 / 18</span></div>
+        <div class="progress"><span id="prepBar" style="width:0%"></span></div>
+        <div class="progressMeta"><span>Checklist</span><span id="prepPct">0%</span></div>
+        <div class="checkgroup"><div class="groupHead">重要證件 <span>▾</span></div>
+          <label class="item"><input type="checkbox"><span>護照</span></label><label class="item"><input type="checkbox"><span>信用卡</span></label><label class="item"><input type="checkbox"><span>國際駕照</span></label><label class="item"><input type="checkbox"><span>國內駕照</span></label><label class="item"><input type="checkbox"><span>保險</span></label>
+        </div>
+        <div class="checkgroup"><div class="groupHead">日常用品 <span>▾</span></div>
+          <label class="item"><input type="checkbox"><span>牙刷牙膏</span></label><label class="item"><input type="checkbox"><span>盥洗用品</span></label><label class="item"><input type="checkbox"><span>保養品</span></label><label class="item"><input type="checkbox"><span>隱眼／墨鏡</span></label><label class="item"><input type="checkbox"><span>防曬</span></label><label class="item"><input type="checkbox"><span>個人衛生用品</span></label><label class="item"><input type="checkbox"><span>隨身藥品</span></label><label class="item"><input type="checkbox"><span>口罩</span></label><label class="item"><input type="checkbox"><span>梳子</span></label><label class="item"><input type="checkbox"><span>吹風機</span></label><label class="item"><input type="checkbox"><span>酒精消毒液</span></label><label class="item"><input type="checkbox"><span>行動電源</span></label><label class="item"><input type="checkbox"><span>轉接頭</span></label><label class="item"><input type="checkbox"><span>eSIM</span></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="itinerary" class="section">
+      <div class="card">
+        <div class="dayTabs" id="dayTabs"></div>
+      </div>
+      <div id="dayContent"></div>
+    </section>
+
+    <section id="budget" class="section">
+      <div class="card"><div class="cardTitle"><h2>旅費</h2><span class="small">可自行補登</span></div>
+        <div class="empty">目前 Word 行程表沒有提供旅費總表，所以這一版先保留「交通／住宿／餐飲／體驗／購物」分類，之後可直接加入金額與自動統計。</div>
+        <div class="priceGrid" style="margin-top:12px"><div class="metric"><div class="k">住宿</div><div class="v">—</div></div><div class="metric"><div class="k">交通</div><div class="v">—</div></div><div class="metric"><div class="k">餐飲</div><div class="v">—</div></div><div class="metric"><div class="k">體驗</div><div class="v">—</div></div></div>
+      </div>
+    </section>
+
+    <section id="links" class="section">
+      <div class="card links"><div class="cardTitle"><h2>快速連結</h2><span class="small">開啟新分頁</span></div>
+        <a href="https://www.google.com/maps/search/Grindelwald" target="_blank">Grindelwald 地圖 <span class="arrow">↗</span></a>
+        <a href="https://www.google.com/maps/search/Zermatt" target="_blank">Zermatt 地圖 <span class="arrow">↗</span></a>
+        <a href="https://www.google.com/maps/search/Roma" target="_blank">Roma 地圖 <span class="arrow">↗</span></a>
+        <a href="https://www.google.com/maps/search/Venezia" target="_blank">Venezia 地圖 <span class="arrow">↗</span></a>
+        <a href="https://www.google.com/maps/search/Milano" target="_blank">Milano 地圖 <span class="arrow">↗</span></a>
+        <a href="https://www.sbb.ch/" target="_blank">SBB <span class="arrow">↗</span></a>
+        <a href="https://www.italotreno.com/" target="_blank">Italo <span class="arrow">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <nav class="nav">
+    <button class="active" data-target="overview"><span class="icon">◒</span>總覽</button>
+    <button data-target="prep"><span class="icon">☑</span>準備</button>
+    <button data-target="itinerary"><span class="icon">⌖</span>行程</button>
+    <button data-target="budget"><span class="icon">▣</span>旅費</button>
+    <button data-target="links"><span class="icon">↗</span>連結</button>
+  </nav>
+  <div class="toast" id="toast">已完成</div>
+</div>
+<script>
+const days=[
+ {d:1,date:'10/01',title:'初見瑞士：圖恩湖畔的蔚藍序曲',city:'Spiez → Grindelwald',events:[['07:35','抵達米蘭馬爾彭薩機場 (MXP)','通關、提取行李，預計 10:00 前入境。'],['10:19–15:37','跨國快鐵 EC50 → Spiez','行李寄放後，輕裝前往 Lake Thun 散策。','湖畔 Spritz'],['傍晚','前往格林德瓦','Check-in 後至 Coop 採買水果與起司，享受山城第一夜。']]},
+ {d:2,date:'10/02',title:'Bachalpsee 高山健行與夢幻山坡',city:'Grindelwald',events:[['07:30–08:00','Grindelwald → First 纜車','清晨上山，空氣最透亮。'],['08:30–11:00','Bachalpsee 高原健行','約 6 km／2–3 小時；湖畔野餐。','瑞士經典風景'],['下午','山間滑板車 → 格林德瓦','約 3 km 下滑路線，傍晚回小鎮看夕陽。'],['晚上','Fondue / Raclette','露天餐廳享用熱騰騰的起司料理。','Adventure package CHF 60']]},
+ {d:3,date:'10/03',title:'藍寶石之眼：山城漫步與黑臉羊尋踪',city:'Kandersteg → Zermatt',events:[['07:30–08:00','Grindelwald → Kandersteg','經 Interlaken Ost、Spiez 轉乘。'],['08:30–11:30','厄西嫩湖 Oeschinensee','纜車上山；C 路線輕鬆下行至湖邊。','山湖絕景'],['12:00–14:30','Kandersteg → Zermatt','於 Visp 轉乘 MGB，進入無車山城。'],['15:00','Zermatt 小鎮散策','Check-in、Bahnhofstrasse、Hinterdorf、Kirchbrücke 日落機位。']]},
+ {d:4,date:'10/04',title:'日照金山：Gornergrat 與 Riffelsee',city:'Zermatt',events:[['06:30–07:15','馬特洪峰黃金日出','步行至 Kirchbrücke，看第一道曙光擊中峰頂。'],['08:30–11:30','Gornergrat 齒軌鐵道','抵達 3,089 m；建議坐右側。'],['11:30–14:30','Riffelsee 倒影健行','Rotenboden 下車，步行約 5 分鐘到湖邊，再沿步道下山。','攝影重點'],['18:00','Riedweg 黃昏觀景點','俯瞰策馬特小鎮燈火，晚餐慶祝聖山追景。']]},
+ {d:5,date:'10/05',title:'跨越國境的鐵道長徵，抵達羅馬',city:'Zermatt → Milano → Roma',events:[['07:05–10:50','Zermatt → Milano','火車南下至 Milano Centrale。'],['11:15–14:30','Milano → Roma · Italo','抵達 Roma Termini 後 Check-in。'],['16:00–20:30','Trevi → Pantheon → Piazza Navona','巴洛克噴泉與廣場暮光散策。','Carbonara / Cacio e Pepe']]},
+ {d:6,date:'10/06',title:'帝國的終章與古羅馬的榮耀',city:'Roma',events:[['07:30–08:00','競技場拍照機位','Colosseo 站觀景台。'],['09:00–12:30','Colosseum','預約門票進場，感受古羅馬帝國歷史。'],['12:30–14:00','Piazza Venezia + 義式午餐','白色大理石地標與巷弄餐館。'],['14:00–17:00','Villa Borghese','公園散策，可安排湖上小船。'],['17:00–18:30','Pincio 夕陽','眺望羅馬屋頂與聖彼得大教堂。'],['19:00','Trastevere 晚餐','台伯河西岸小酒館晚餐。']]},
+ {d:7,date:'10/07',title:'諸神的光點：梵蒂岡的聖境',city:'Vatican City → Roma',events:[['08:00–12:30','梵蒂岡博物館與西斯廷禮拜堂','仰望《創世紀》與《最後的審判》。'],['14:00–17:00','聖彼得大教堂與登頂','朝聖《聖殤》，登上圓頂俯瞰廣場。'],['17:30–19:30','聖天使堡與台伯河黃昏','沿協和大道散步至河畔。']]},
+ {d:8,date:'10/08',title:'佛羅倫斯文藝復興，夜奔威尼斯',city:'Roma → Firenze → Venezia',events:[['07:25–09:00','Roma → Firenze · 高鐵','Firenze SMN 抵達後寄放大行李。'],['09:15–11:30','Duomo','早晨斜射光下欣賞紅磚圓頂與大理石立面。'],['11:30–13:30','Piazza della Signoria + Mercato Centrale','Da Nerbone：Panino con Lampredotto。'],['13:30–16:00','Ponte Vecchio','沿阿諾河散步。'],['16:30–18:30','Piazzale Michelangelo','俯瞰佛羅倫斯紅屋頂與晚霞。'],['19:00–22:30','Firenze → Venezia','回車站取行李，夜奔威尼斯本島。']]},
+ {d:9,date:'10/09',title:'威尼斯本島：水上都市散策',city:'Venezia',events:[['09:00–11:00','Ponte dell’Accademia','清晨經典大運河視角。'],['11:00–13:30','Ponte di Rialto','手工藝小巷＋墨魚麵與海鮮。'],['13:30–16:30','Piazza San Marco + 嘆息橋','深入聖馬可大教堂與歷史景點。'],['16:30–17:30','Gondola','黃金夕陽下的貢多拉體驗。'],['18:00–20:00','Vaporetto → Accademia','Blue Hour 回到起點，看大運河華燈初上。']]},
+ {d:10,date:'10/10',title:'時尚之都的拱廊與餐前酒',city:'Venezia → Milano',events:[['上午–14:00','威尼斯 → 米蘭','搭乘高鐵前往米蘭，約 2.5 小時。'],['下午','Milano 行程','Word 原始行程在此段尚未填完，App 先保留空間。','待補']]},
+ {d:11,date:'10/11',title:'終章：帶著滿載的靈魂返家',city:'Milano → TPE',events:[['07:30–08:30','Malpensa Express','前往 MXP 機場。'],['08:30–11:15','退稅與臨別巡禮','預留近 3 小時辦理精品退稅。'],['11:15','MXP → TPE','長榮航空直飛返台。']]}
+];
+const tabWrap=document.getElementById('dayTabs'), content=document.getElementById('dayContent');
+let currentDay=1;
+function renderTabs(){tabWrap.innerHTML=days.map(x=>`<button class="dayTab ${x.d===currentDay?'active':''}" data-day="${x.d}" aria-label="第 ${x.d} 天，${x.date}"><b>${x.d}</b><span>${x.date}</span></button>`).join(''); [...tabWrap.children].forEach(b=>b.onclick=()=>{currentDay=+b.dataset.day;renderDay();}); requestAnimationFrame(()=>tabWrap.querySelector('.active')?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'}));}
+function changeDay(step){currentDay=Math.min(days.length,Math.max(1,currentDay+step));renderDay();window.scrollTo({top:0,behavior:'smooth'});}
+function renderDay(){renderTabs();let d=days.find(x=>x.d===currentDay);content.innerHTML=`<div class="card dayOverview"><div class="small">DAY ${d.d} / ${days.length} · ${d.date}</div><h2 style="margin:5px 0 0">${d.title}</h2><div class="dayMeta"><span>⌖ ${d.city}</span><span>${d.events.length} 個行程點</span></div></div><div class="card"><div class="routeHeader"><div><div class="routeDot"></div><div class="routeLine"></div></div><div><b style="font-size:12px">當日路線</b><div class="small">依時間往下看，點「地圖」直接導航</div></div></div>${d.events.map(e=>`<div class="event"><div class="time">${e[0]}</div><div class="eventHead"><h3>${e[1]}</h3><a class="mapLink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e[1])}" target="_blank" rel="noopener">地圖 ↗</a></div><p>${e[2]}</p>${e[3]?`<span class="tag">${e[3]}</span>`:''}</div>`).join('')}<div class="dayControls"><button class="dayArrow" onclick="changeDay(-1)" ${currentDay===1?'disabled':''}>← 前一天</button><button class="dayArrow" onclick="changeDay(1)" ${currentDay===days.length?'disabled':''}>後一天 →</button></div></div>`;}
+renderDay();
+
+document.querySelectorAll('.nav button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(btn.dataset.target).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}));
+const inputs=[...document.querySelectorAll('#prep input')];
+function updatePrep(){let n=inputs.filter(x=>x.checked).length,total=inputs.length,p=Math.round(n/total*100);document.getElementById('prepMeta').textContent=`${n} / ${total}`;document.getElementById('prepPct').textContent=p+'%';document.getElementById('prepBar').style.width=p+'%';localStorage.setItem('swissPrep',JSON.stringify(inputs.map(x=>x.checked)));}
+try{const saved=JSON.parse(localStorage.getItem('swissPrep')||'null');if(saved)inputs.forEach((x,i)=>x.checked=!!saved[i])}catch(e){}
+inputs.forEach(x=>x.addEventListener('change',()=>{updatePrep();showToast('已更新清單')}));updatePrep();
+function showToast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove('show'),1200)}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})});}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();showToast('可從瀏覽器選單加入主畫面');});
+</script>
+</body>
+</html>
