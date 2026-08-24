@@ -13,9 +13,14 @@ function Require-Gh {
   }
 }
 
+function Test-GitRemote([string]$Name) {
+  $remotes = @(git remote)
+  return $remotes -contains $Name
+}
+
 Require-Gh
 
-$auth = gh auth status 2>&1
+gh auth status *> $null
 if ($LASTEXITCODE -ne 0) {
   Write-Host ''
   Write-Host 'Please sign in to GitHub first:' -ForegroundColor Yellow
@@ -34,13 +39,20 @@ if (-not (Test-Path '.git')) {
   git branch -M main | Out-Null
 }
 
-$remoteUrl = git remote get-url origin 2>$null
-if (-not $remoteUrl) {
+if (-not (Test-GitRemote 'origin')) {
   Write-Host "Creating GitHub repo: $RepoName" -ForegroundColor Cyan
   gh repo create $RepoName --public --source=. --remote=origin --push
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Failed to create or push the GitHub repo.' -ForegroundColor Red
+    exit 1
+  }
 } else {
   Write-Host 'Pushing latest changes to GitHub...' -ForegroundColor Cyan
   git push -u origin main
+  if ($LASTEXITCODE -ne 0) {
+    Write-Host 'Failed to push to GitHub.' -ForegroundColor Red
+    exit 1
+  }
 }
 
 Write-Host ''
