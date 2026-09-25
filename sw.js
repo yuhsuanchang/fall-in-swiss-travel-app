@@ -1,4 +1,4 @@
-const CACHE_NAME = 'swiss-trip-v4';
+const CACHE_NAME = 'swiss-trip-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -24,8 +24,31 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// HTML 走「網路優先」：有網路就一定拿到最新版，沒網路才回落到快取。
+// 其他靜態檔（圖片、icon）維持「快取優先」，載入比較快。
+function isHtml(request) {
+  return request.mode === 'navigate' ||
+    request.destination === 'document' ||
+    (request.headers.get('accept') || '').includes('text/html');
+}
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+
+  if (isHtml(event.request)) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(
+          (cached) => cached || caches.match('./switzerland_italy_trip_app.html')
+        ))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cached) => {
